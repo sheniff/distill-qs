@@ -1,0 +1,142 @@
+<!doctype html>
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" media="screen">
+<link rel="stylesheet" href="../../css/reset.css" media="screen">
+<link rel="stylesheet" href="../../css/base.css" media="screen">
+<link rel="stylesheet" href="../../css/buttons.css" media="screen">
+
+<style type="text/css">
+	#popup {
+		height: 250px;
+    padding: 20px;
+    width: 400px;
+	}
+
+  h1, h6 {
+    display: inline-block;
+  }
+
+  h1 {
+    color: #1889f3;
+		font-size: 1.8em;
+    font-weight: 300;
+    margin-bottom: 5px;
+	}
+
+  h6 {
+    color: #999;
+    font-weight: 300;
+    font-size: 11px;
+    margin-left: 1px;
+    white-space: nowrap;
+  }
+
+  #interviewInfo,
+  #generatedURL {
+    display: none;
+  }
+
+  #generatedURL {
+    margin-top: 10px;
+  }
+
+  #interviewURL {
+    margin-right: 2%;
+    width:  72%;
+  }
+
+  #copyURL {
+    width: 20%;
+  }
+
+  #signin #username,
+  #signin #password {
+    width: 100%;
+  }
+
+  #signin #username {
+    margin-right: 5px;
+  }
+
+  #signin p {
+    color: #222;
+    font-size: 11px;
+    margin: 15px 0 10px;
+  }
+
+  #signin a {
+    outline: none;
+  }
+
+  #signin button,
+  #signin #forgot {
+    display: inline-block;
+    display: -moz-inline-block;
+    vertical-align: middle;
+    zoom: 1;
+  }
+
+  #signin #forgot {
+    font-size: 11px;
+    height: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  #signin .btn {
+    margin-top: 10px;
+  }
+
+</style>
+
+<div id="popup">
+  <div id="loader">
+    <div class="spinner-wrapper">
+      <div class="spinner">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+        <div class="bar6"></div>
+        <div class="bar7"></div>
+        <div class="bar8"></div>
+        <div class="bar9"></div>
+        <div class="bar10"></div>
+        <div class="bar11"></div>
+        <div class="bar12"></div>
+      </div>
+    </div>
+  </div>
+
+  <h1>distill</h1>
+  <h6>Distill Interview Generator v0.1.0</h6>
+
+  <hr class="small">
+
+  <div id="signin">
+    <p>Please provide your <a href="distill.cc" target="_blank">distill.cc</a> login credentials.</p>
+    <input id="username" type="text" placeholder="Email address">
+    <input id="password" type="password" placeholder="Password">
+    <button id="generateURL" class="btn">Sign In</button>
+    <a href="" id="forgot">Forgot password?</a>
+  </div>
+
+  <div id="interviewInfo">
+    <input id="name" type="text">
+    <button id="generateURL" class="btn small">Generate Link</button>
+  </div>
+
+  <div id="generatedURL">
+    <input id="interviewURL" type="text" value="http://distill.cc/i/yw6NIIw7-designer-feedback-test" readonly="true">
+    <button id="copyURL" class="btn">Copy</button>
+
+    <p style="margin-top: 10px; font-size: 11px; color: #707070;">
+      Send this link to the interviewee. No downloads, signups, or accounts needed.
+      Just open the link in Chrome or Firefox and off you go!
+    </p>
+  </div>
+</div>
+
+<script type="text/javascript" src="../../js/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/core.js"></script>

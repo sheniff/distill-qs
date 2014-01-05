@@ -1,0 +1,26 @@
+{
+  "name": "distill",
+  "version": "0.0.1",
+  "description": "Distill Interview Scheduler",
+  "author": "Kieran Boyle",
+  "homepage": "http://distill.cc",
+  "devDependencies": {
+    "bower": "1.2.8",
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.1.2",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-compass": "latest",
+    "grunt-contrib-sass": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-karma": "git://github.com/karma-runner/grunt-karma.git",
+    "karma": "~0.11.0",
+    "karma-jasmine": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-safari-launcher": "latest",
+    "karma-firefox-launcher": "latest",
+    "karma-ng-scenario": "latest"
+  }
+}

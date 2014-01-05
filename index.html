@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" data-ng-app="distill" data-ng-csp="">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>Distill Interview Scheduler</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800">
+    <link rel="stylesheet" href="app/css/reset.css">
+    <link rel="stylesheet" href="app/css/base.css">
+    <link rel="stylesheet" href="app/css/button/button.css">
+    <link rel="stylesheet" href="app/css/views/schedule.css">
+
+  </head>
+  <body id="popup">
+
+    <header data-ng-include="'app/views/header.html'" class="ng-scope"></header>
+
+    <section id="content">
+      <section id="container">
+        <div class="wrapper">
+          <div data-ng-view></div>
+        </div>
+      </section>
+    </section>
+
+    <script src="app/lib/jquery/jquery.min.js"></script>
+
+    <script src="app/lib/angular/angular.js"></script>
+    <script src="app/lib/angular-route/angular-route.min.js"></script>
+    <script src="app/lib/angular-resource/angular-resource.min.js"></script>
+    <script src="app/lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="app/lib/angular-cache/dist/angular-cache.min.js"></script>
+    <script src="app/lib/lodash/dist/lodash.min.js"></script>
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/config/config.js"></script>
+    <script src="app/js/config/router.js"></script>
+    <script src="app/js/config/routes.js"></script>
+    <script src="app/js/config/helpers.js"></script>
+
+    <script src="app/js/controllers/headerController.js"></script>
+    <script src="app/js/controllers/signinController.js"></script>
+    <script src="app/js/controllers/scheduleController.js"></script>
+
+    <script src="app/js/services/loginService.js"></script>
+    <script src="app/js/services/loaderService.js"></script>
+  </body>
+</html>

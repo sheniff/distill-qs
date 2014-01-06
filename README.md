@@ -5,6 +5,7 @@ You'll need to run the following commands from the projects directory:
 ```
 bower install
 npm install
+compass:dist
 grunt
 ```
 ###Loading extenstion 

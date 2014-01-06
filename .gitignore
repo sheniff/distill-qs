@@ -18,3 +18,5 @@ spec/javascripts/tmp/
 node_modules/
 app/lib
 npm-debug.log
+app/js/distill.js
+app/js/distill.min.js

@@ -70,5 +70,5 @@ module.exports = function(grunt){
   });
 
   // the default task can be run just by typing "grunt" on the command line
-  grunt.registerTask('default', ['compass', 'concat', 'uglify']);
+  grunt.registerTask('default', ['compass:dist', 'concat', 'uglify']);
 };

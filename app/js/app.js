@@ -5,7 +5,9 @@
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'ivpusic.cookie',
     'jmdobry.angular-cache',
+    'ui',
     'distill.helpers',
     'distill.routes',
     'distill.services',
@@ -16,7 +18,9 @@
 
   angular.module('distill.filters', []);
 
-  angular.module('distill.directives', []);
+  angular.module('distill.directives', [
+    'distill.directives.qs'
+  ]);
 
   angular.module('distill.services', [
     'distill.services.login',
@@ -27,6 +31,7 @@
     'distill.controllers.header',
     'distill.controllers.schedule',
     'distill.controllers.signin',
+    'distill.controllers.qs'
   ]);
 
 })(angular);

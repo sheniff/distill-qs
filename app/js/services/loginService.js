@@ -11,9 +11,9 @@ angular
         login: function(user){
           var result = $q.defer();
 
-          $http.post(URL + '/api/v1/users/login', { user: user })
+          // $http.post(URL + '/api/v1/users/login', { user: user })
+          $http.post(URL + '/jester/sign_in', { user: user })
             .success(function(data){
-              console.log('logged in!', data);
               result.resolve(data);
             })
             .error(function(data, status) {
@@ -24,7 +24,20 @@ angular
           return result.promise;
         },
 
-        logout: function(redirectPath){},
+        logout: function(){
+          var result = $q.defer();
+
+          $http.delete(URL + '/users/sign_out')
+            .success(function(){
+              result.resolve();
+            })
+            .error(function(data, status) {
+              console.log('error logging out...', data);
+              result.reject({status: status, error: data.error});
+            });
+
+          return result.promise;
+        },
 
         signedIn: function(redirectPath){
           var result = $q.defer();
@@ -36,7 +49,6 @@ angular
             })
             .error(function(data, status){
               if(status === 401){
-                console.log('You need to log in.');
                 result.reject(data, status);
                 $rootScope.goTo(redirectPath || 'sign_in');
               } else {

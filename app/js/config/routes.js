@@ -12,7 +12,7 @@ angular
       // define application routes
       $$router
         .when('forgot_password',  '/forgot',        $$router.routeHash('users/forgot',       'SigninCtrl'))
-        .when('schedule',         '/schedule',      $$router.routeHash('schedule/index',     'ScheduleCtrl',  { resolve: { loggedin: checkLoggedin } }))
+        .when('schedule',         '/schedule',      $$router.routeHash('schedule/index',     'ScheduleCtrl',  { resolve: { user: checkLoggedin } }))
         .when('sign_in',          '/signin',        $$router.routeHash('users/signin',       'SigninCtrl'))
 
         // redirect undefined routes to

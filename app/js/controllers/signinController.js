@@ -14,24 +14,15 @@ angular
 
           loginService.login($scope.user).then(
             // success
-            function(user){
-              loaderService.hide();
-              $scope.err = null;
-
-              // To be deleted
-              loginService.signedIn().then(
-                function(data) { console.log('logged in', data) },
-                function(data) { console.log('Not logged in...', data) }
-              );
-
-              // To be uncommented
-              //$scope.goTo('schedule');
-            },
-            // error
             function(data){
+              console.log(data);
               loaderService.hide();
-              console.log('Error', data.status, data.error);
-              $scope.err = data.error;
+              if(data.error){
+                $scope.err = data.error;
+              }else{
+                $scope.err = null;
+                $scope.goTo('schedule');
+              }
             }
           );
         }

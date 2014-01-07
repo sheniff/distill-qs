@@ -1,0 +1,257 @@
+<div id='quick-scheduler-wrapper'>
+  <div id='qs-step-1' data-ng-hide='showInstructions || showConfirmation'>
+    <h4>
+      <div class='left'>
+        Single Interview
+      </div>
+      <div class='right'>
+        <div class='rel'>
+          <span class='asterisk'>*</span>
+          <span class='italic'>
+            Required
+          </span>
+        </div>
+      </div>
+    </h4>
+    <div class='ptn rel'>
+      <div id='ui-custom-alert'>
+        <div class='ui-notification error'>
+          <span>
+            Please provide the candidate's name
+          </span>
+        </div>
+      </div>
+      <form class='ui-form align-right' name='quickSchedForm' data-ng-submit='create()'>
+        <div class='p20 pt10 pb5'>
+          <div class='ui-form-field'>
+            <div class='ui-form-field-label' data-ng-class='{ error: quickSchedForm.errorOn.candidateName }'>
+              Candidate's name
+              <span class='asterisk'>*</span>
+            </div>
+            <div class='ui-form-field-value'>
+              <input class='xlarge' name='candidateName' data-ng-keyup='checkKeyCode($event)' data-ng-model='newPanel.candidate_name' required type='text'>
+            </div>
+          </div>
+          <div class='ui-form-field'>
+            <div class='ui-form-field-label' data-ng-class='{ error: quickSchedForm.errorOn.candidateEmail }'>
+              Candidate's email
+            </div>
+            <div class='ui-form-field-value'>
+              <input class='xlarge' name='candidateEmail' data-ng-keyup='checkKeyCode($event)' data-ng-model='newPanel.candidate_email' type='email'>
+            </div>
+          </div>
+          <div class='ui-form-field mt5'>
+            <div class='ui-form-field-label'>
+              Job title
+            </div>
+            <div class='ui-form-field-value'>
+              <input id='source' data-ng-model='newPanel.job_role' style='width: 270px;' data-ui-select2x='rolesSelect'>
+            </div>
+          </div>
+          <div class='ui-form-field'>
+            <div class='ui-form-field-label'>
+              Interviewer
+            </div>
+            <div class='ui-form-field-value'>
+              <input type="hidden" id='quick_interviewer' name='interviewer' data-ng-model='newPanel.interviewer' style='width: 270px' data-ui-select2x='interviewersSelect'>
+            </div>
+          </div>
+        </div>
+        <div id='optional-data' data-ng-class='{ pbn: !hideAdvanced }'>
+          <div class='optional-toggle'>
+            <h6 class='mini-heading cursor-hand'>
+              <span data-ng-click='toggleAdvanced()'>
+                MORE OPTIONS
+              </span>
+              <button class='flaticon stroke down-2' data-ng-click='toggleAdvanced()' data-ng-show='hideAdvanced' type='button'></button>
+              <button class='flaticon stroke up-2' data-ng-click='toggleAdvanced()' data-ng-hide='hideAdvanced' type='button'></button>
+            </h6>
+          </div>
+          <div data-ng-hide='hideAdvanced'>
+            <div class='ui-form-field'>
+              <div class='ui-form-field-label'>
+                Date &amp; Time
+              </div>
+              <div class='ui-form-field-value'>
+                <!-- <input class='w130' id='quick-date' name='date' data-ng-keyup='checkKeyCode($event)' data-ng-model='newPanel.starts_at' placeholder='MM/DD/YYYY' type='text' ui-date> -->
+                <select class='w130' id='interview-time' data-ng-keyup='checkKeyCode($event)' data-ng-model='newPanel.quick_time' data-ng-options='k as v for (k,v) in time_intervals' data-ui-select2x='timeConfig'>
+                  <option value=''></option>
+                </select>
+                <span class='timezone-label ml5'>
+                  {{$root.timezone}}
+                </span>
+              </div>
+            </div>
+            <div class='ui-form-field'>
+              <div class='ui-form-field-label minutes'>
+                Length
+              </div>
+              <div class='ui-form-field-value'>
+                <div ui-keydown='{ 9: tabToNextInterview }' x-timepicker='newPanel.quickDuration'></div>
+              </div>
+            </div>
+            <div class='ui-form-field pt5'>
+              <div class='ui-form-field-label align-top'>
+                Task List
+              </div>
+              <div class='ui-form-field-value'>
+                <textarea id='quick-task-list' data-ng-model='newPanel.tasks' placeholder='1. Enter tasks for interviewer to complete                                                                                       2. You can also enter questions for the interviewer to ask                                                                                                 3. Only employees of your company will see this text'></textarea>
+              </div>
+            </div>
+            <div class='ui-form-field'>
+              <div class='ui-form-field-label'>
+                Type
+              </div>
+              <div class='ui-form-field-value'>
+                <div class='ui-form-radio' data-ng-click="previousType = 'video'">
+                  <label>
+                    <input name='av_radio' data-ng-model='newPanel.interviews[0].media_type' type='radio' value='0'>
+                    &nbsp; Video &plus; Audio
+                  </label>
+                </div>
+                <div class='ui-form-radio' data-ng-click="previousType = 'audio'">
+                  <label>
+                    <input name='av_radio' data-ng-model='newPanel.interviews[0].media_type' type='radio' value='1'>
+                    &nbsp; Audio-only
+                  </label>
+                </div>
+                <div class='ui-form-radio' data-ng-click="previousType = 'none'">
+                  <label title='In-person/phone interview...'>
+                    <input name='av_radio' data-ng-model='newPanel.interviews[0].media_type' type='radio' value='2'>
+                    &nbsp; In-person
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class='ui-form-field' data-ng-hide='!hasFilepicker'>
+              <div class='ui-form-field-label'>
+                Resume
+              </div>
+              <div class='ui-form-field-value'>
+                <div id='addresume' data-ng-hide='attachments.length'></div>
+                <div id='attached' data-ng-show='attachments.length'>
+                  <a data-ng-click='' data-ng-repeat='file in attachments'>
+                    <i class='flaticon stroke paperclip-1'></i>
+                    <span class='filename'>
+                      {{file.filename || file.name}}
+                    </span>
+                    <i class='flaticon stroke x-1' data-ng-click='remove(file)'></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class='footer'>
+        <a class='btn silver w75 mr5' data-ng-click='sanitize()'>
+          Cancel
+        </a>
+        <input class='btn w75' data-ng-class='{ disabled: saving }' data-ng-click='create()' data-ng-disabled='saving' type='submit' value='Create'>
+      </div>
+    </div>
+  </div>
+  <div id='quick-schedule-instructions' data-ng-show='showInstructions'>
+    <h4>
+      <div class='left'>
+        Interview Created!
+      </div>
+    </h4>
+    <div class='p20'>
+      <h3 class='strong'>
+        {{newPanel.candidate_name}}
+      </h3>
+      <div class='candidate-email mt5' data-ng-show='newPanel.candidate_email'>
+        {{newPanel.candidate_email}}
+      </div>
+      <div class='candidate-role' data-ng-show='newPanel.interviews[0].job_role || newPanel.interviews[0].interviewer'>
+        <span data-ng-show='newPanel.interviews[0].job_role'>
+          {{newPanel.interviews[0].job_role.text}}
+        </span>
+        <span data-ng-show='newPanel.interviews[0].job_role &amp;&amp; newPanel.interviews[0].interviewer'>
+          -
+        </span>
+        <span data-ng-show='newPanel.interviews[0].interviewer'>
+          Interviewing with {{newPanel.interviews[0].interviewer.name}}
+        </span>
+      </div>
+      <div id='emails' data-ng-show='newPanel.candidate_email.length || newPanel.interviews[0].interviewer'>
+        <h3 class='strong'>
+          Invitations
+        </h3>
+        <div class='pt10' data-ng-show='newPanel.candidate_email'>
+          <input id='invite_candidate' name='send_invite' data-ng-model='newPanel.email_candidate' type='checkbox'>
+          <label class='invite-text inline ml5' for='invite_candidate'>
+            Send invite to candidate
+          </label>
+        </div>
+        <div class='pt5' data-ng-show='newPanel.interviews[0].interviewer'>
+          <input class='inline' id='invite_interviewer' name='send_invite' data-ng-model='newPanel.email_interviewer' type='checkbox'>
+          <label class='invite-text inline' for='invite_interviewer'>
+            Send invite to interviewer
+          </label>
+        </div>
+      </div>
+      <div class='generated-link' data-ng-hide='newPanel.interviews[0].media_type == 2'>
+        <i class='flaticon stroke link-3 blue'></i>
+        <a data-ng-href='{{interviewLink}}'>
+          {{interviewLink}}
+        </a>
+      </div>
+      <div class='mt20'>
+        <p class='to-whom' data-ng-show='newPanel.email_candidate || newPanel.email_interviewer'>
+          This will be sent to
+          <span data-ng-hide='newPanel.email_interviewer'>
+            the candidate
+          </span>
+          <span data-ng-hide='newPanel.email_candidate'>
+            the interviewer
+          </span>
+          <span data-ng-show='newPanel.email_candidate &amp;&amp; newPanel.email_interviewer'>
+            both parties
+          </span>
+        </p>
+        <p class='to-whom' data-ng-hide='newPanel.email_candidate || newPanel.email_interviewer'>
+          Copy and paste this into an email
+        </p>
+        <div id='qs-invite-text-widget' x-emailbody x-emailbody-panel='newPanel' x-emailbody-role='jobRole'></div>
+        <div class='inline mt15' id='clip_container'>
+          <div class='btn silver small' id='clip_button' x-clipboard x-clipboard-target='newPanel.email_content_copy'>
+            Copy to clipboard
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='footer'>
+      <button class='btn w125' data-ng-click='send()' data-ng-show='newPanel.email_candidate || newPanel.email_interviewer' type='button'>
+        Save &amp; Send
+      </button>
+      <button class='btn w100' data-ng-click='sanitize()' data-ng-hide='newPanel.email_candidate || newPanel.email_interviewer || messageSent' type='button'>
+        Save
+      </button>
+    </div>
+  </div>
+  <div id='quick-schedule-confirmation' key-enter='sanitize()' data-ng-show='showConfirmation' x-mousetrap>
+    <h4>
+      <div class='left'>
+        Invitations Sent!
+      </div>
+    </h4>
+    <div class='p50'>
+      <h5 class='text-center'>
+        Interview invitations have been sent to:
+      </h5>
+      <a class='email' href='mailto:{{newPanel.candidate_email}}'>
+        {{newPanel.candidate_email}}
+      </a>
+      <a class='email' href='mailto:{{newPanel.interviews[0].interviewer.email}}'>
+        {{newPanel.interviews[0].interviewer.email}}
+      </a>
+    </div>
+    <div class='footer'>
+      <button class='btn' data-ng-click='sanitize()' type='button'>
+        Close Window
+      </button>
+    </div>
+  </div>
+</div>

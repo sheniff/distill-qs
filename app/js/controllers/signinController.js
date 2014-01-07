@@ -6,21 +6,34 @@ angular
     function($scope, $location, loginService, loaderService){
 
       angular.extend($scope, {
-        email: null,
-        name: null,
-        pass: null,
+        user: {},
         login: function(callback){
           $scope.err = null;
 
           loaderService.show();
 
-          loginService.login($scope.email, $scope.pass, $location.path, function(err, user){
-            $scope.err = err || null;
+          loginService.login($scope.user).then(
+            // success
+            function(user){
+              loaderService.hide();
+              $scope.err = null;
 
-            loaderService.hide();
+              // To be deleted
+              loginService.signedIn().then(
+                function(data) { console.log('logged in', data) },
+                function(data) { console.log('Not logged in...', data) }
+              );
 
-            typeof(callback) === 'function' && callback(err, user);
-          });
+              // To be uncommented
+              //$scope.goTo('schedule');
+            },
+            // error
+            function(data){
+              loaderService.hide();
+              console.log('Error', data.status, data.error);
+              $scope.err = data.error;
+            }
+          );
         }
       });
     }

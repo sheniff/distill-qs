@@ -10,10 +10,10 @@
     "128": "app/img/icons/icon128.png"
   },
   "default_locale": "en",
-  "background": {
-    "page": "ext/src/bg/background.html",
-    "persistent": true
-  },
+  // "background": {
+  //   "page": "index.html",
+  //   "persistent": true
+  // },
   "browser_action": {
     "default_icon": "app/img/icons/icon128.png",
     "default_title": "Distill Interview Generator",
@@ -25,7 +25,8 @@
     "notifications",
     "http://*.distill.cc/",
     "https://*.distill.cc/",
-    "http://localhost/"
+    "http://localhost/",
+    "http://0.0.0.0:3000/"
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' "
 }

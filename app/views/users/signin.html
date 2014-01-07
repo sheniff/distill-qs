@@ -1,9 +1,9 @@
 <div id="signin" data-ng-controller="SigninCtrl">
   <form class="ng-pristine ng-valid">
-    <p class="error"></p>
-    <p>Please provide your <a href="distill.cc" target="_blank">distill.cc</a> login credentials.</p>
-    <input id="username" type="text" placeholder="Email address"  data-ng-model="email">
-    <input id="password" type="password" placeholder="Password" data-ng-model="pass">
+    <p class="error" data-ng-show="err">{{err}}</p>
+    <p>Please provide your <a href="http://distill.cc" target="_blank">distill.cc</a> login credentials.</p>
+    <input id="username" type="text" placeholder="Email address"  data-ng-model="user.email">
+    <input id="password" type="password" placeholder="Password" data-ng-model="user.password">
     <button id="generateURL" class="btn" data-ng-click="login()">Sign In</button>
     <a href="#/forgot" id="forgot">Forgot password?</a>
   </form>
